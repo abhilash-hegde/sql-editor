@@ -1,4 +1,11 @@
 # SQL Query Editor
+![Next.js](https://img.shields.io/badge/Next.js-000000?style=for-the-badge&logo=next.js&logoColor=white)
+![React](https://img.shields.io/badge/React-20232a?style=for-the-badge&logo=react&logoColor=61DAFB)
+![ShadCN](https://img.shields.io/badge/ShadCN-ffffff?style=for-the-badge&logo=radix-ui&logoColor=black)
+![Tailwind CSS](https://img.shields.io/badge/TailwindCSS-38B2AC?style=for-the-badge&logo=tailwind-css&logoColor=white)
+![TanStack](https://img.shields.io/badge/TanStack-EF4444?style=for-the-badge&logo=react-query&logoColor=white)
+![Radix UI](https://img.shields.io/badge/RadixUI-ffffff?style=for-the-badge&logo=radix-ui&logoColor=black)
+
 
 ## Overview
 
