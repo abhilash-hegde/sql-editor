@@ -15,7 +15,7 @@ export default function ExportButton({
   variant = "default",
 }) {
   return (
-    <DropdownMenu >
+    <DropdownMenu>
       <DropdownMenuTrigger disabled={disabled} asChild>
         <Button variant={variant}>{exportText}</Button>
       </DropdownMenuTrigger>

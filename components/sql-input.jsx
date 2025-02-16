@@ -1,4 +1,4 @@
-import { Textarea } from "@/components/ui/textarea"
+import { Textarea } from "@/components/ui/textarea";
 
 export default function SQLInput({ value, onChange, onKeyDown }) {
   return (
@@ -9,7 +9,5 @@ export default function SQLInput({ value, onChange, onKeyDown }) {
       placeholder="Enter your SQL query here..."
       className="font-mono min-h-[100px]"
     />
-  )
+  );
 }
-
-

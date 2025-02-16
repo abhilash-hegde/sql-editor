@@ -17,6 +17,9 @@ Access the SQL Query Editor at: [SQL Query Editor](https://sql-editor-eta.vercel
   - `tailwindcss`: For styling
   - `lucide-react`: For icons
 
+## Predefined SQL Queries
+
+
 ## Performance Metrics
 
 ### Page Load Time
@@ -45,3 +48,23 @@ To achieve high performance and fast load times, we implemented the following op
 7. **Optimized Table Rendering**: Utilized `@tanstack/react-table` for performant and efficient table handling, minimizing unnecessary re-renders.
 
 With these improvements, SQL Query Editor provides a seamless and efficient experience for users executing and managing SQL queries.
+
+## Available SQL Queries
+
+Here is a list of available SQL queries in the application:
+
+1. **Get all order details** - Fetches comprehensive order details with customer, employee, product, and shipping information.
+2. **Get recent orders** - Retrieves the 50 most recent orders.
+3. **Total Sales Per Customer** - Identifies high-value customers based on total spending.
+4. **Get Best-Selling Products** - Lists the top 10 best-selling products.
+5. **Get Sales Per Category** - Displays sales performance by product category.
+6. **Get Employees with the Most Orders Handled** - Identifies top-performing employees.
+7. **Get Orders Shipped Late** - Shows orders that were shipped past their required date.
+8. **Get Revenue Per Supplier** - Finds suppliers contributing the most revenue.
+9. **Get Customer Orders with Product Details** - Displays each customer's orders along with purchased products.
+10. **Get Monthly Sales Trend** - Tracks sales performance over time.
+11. **Get Orders by Region** - Determines order distribution by region.
+12. **Get Orders with High Discounts** - Lists orders that received significant discounts.
+13. **Get all customers** - Fetches all customer records.
+
+These queries provide essential insights into order management, customer behavior, and sales trends, helping users analyze and optimize their database operations efficiently.

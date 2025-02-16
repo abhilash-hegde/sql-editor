@@ -1,13 +1,13 @@
-"use client"
+"use client";
 
-import { Button } from "@/components/ui/button"
-import availableQueries from "@/constants/available-queries"
+import { Button } from "@/components/ui/button";
+import availableQueries from "@/constants/available-queries";
 import {
   Tooltip,
   TooltipContent,
   TooltipProvider,
   TooltipTrigger,
-} from "@/components/ui/tooltip"
+} from "@/components/ui/tooltip";
 
 export default function AvailableQueries({ onSelectQuery }) {
   return (
@@ -27,13 +27,13 @@ export default function AvailableQueries({ onSelectQuery }) {
             <TooltipContent>
               <span className="text-xs">{query.name}</span>
               <div className="flex justify-start text-xs">
-                <span className="text-gray-400">Description:</span> <span className="text-gray-500" >{query.purpose}</span>
+                <span className="text-gray-400">Description:</span>{" "}
+                <span className="text-gray-500">{query.purpose}</span>
               </div>
             </TooltipContent>
           </Tooltip>
         </TooltipProvider>
       ))}
     </div>
-  )
+  );
 }
-

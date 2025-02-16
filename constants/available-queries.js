@@ -1,8 +1,8 @@
 export default [
-    {
-        name: "Get all order details",
-        queryKey: "getAllOrderDetails",
-        query: `SELECT 
+  {
+    name: "Get all order details",
+    queryKey: "getAllOrderDetails",
+    query: `SELECT 
     o.orderID,
     o.customerID,
     c.companyName AS customerName,
@@ -42,21 +42,30 @@ LEFT JOIN products p ON d.productID = p.productID
 LEFT JOIN categories cat ON p.categoryID = cat.categoryID
 LEFT JOIN suppliers sup ON p.supplierID = sup.supplierID;
 `,
-        tables: ["orders", "customers", "employees", "shippers", "products", "categories", "suppliers"],
-        purpose: "View all order details with customer, employee, product, and shipping information",
-    },
-    {
-        name: "Get recent orders",
-        queryKey: "getRecentOrders",
-        query: "SELECT * FROM orders ORDER BY order_date DESC LIMIT 50",
-        purpose: "View the most recent 50 orders",
-        tables: ["orders"],
-    },
-    {
-        name: "Total Sales Per Customer",
-        queryKey: "getTotalSalesPerCustomer",
-        purpose: "Identify high-value customers",
-        query: `SELECT 
+    tables: [
+      "orders",
+      "customers",
+      "employees",
+      "shippers",
+      "products",
+      "categories",
+      "suppliers",
+    ],
+    purpose:
+      "View all order details with customer, employee, product, and shipping information",
+  },
+  {
+    name: "Get recent orders",
+    queryKey: "getRecentOrders",
+    query: "SELECT * FROM orders ORDER BY order_date DESC LIMIT 50",
+    purpose: "View the most recent 50 orders",
+    tables: ["orders"],
+  },
+  {
+    name: "Total Sales Per Customer",
+    queryKey: "getTotalSalesPerCustomer",
+    purpose: "Identify high-value customers",
+    query: `SELECT 
     o.customerID, 
     c.companyName, 
     SUM(d.unitPrice * d.quantity * (1 - d.discount)) AS totalSpent
@@ -70,13 +79,13 @@ JOIN JSON_TABLE(o.details, '$[*]' COLUMNS (
 )) AS d ON TRUE
 GROUP BY o.customerID, c.companyName
 ORDER BY totalSpent DESC;`,
-        tables: ["orders", "customers"],
-    },
-    {
-        name: "Get Best-Selling Products",
-        queryKey: "getBestSellingProducts",
-        purpose: "Identify popular products",
-        query: `SELECT 
+    tables: ["orders", "customers"],
+  },
+  {
+    name: "Get Best-Selling Products",
+    queryKey: "getBestSellingProducts",
+    purpose: "Identify popular products",
+    query: `SELECT 
     p.productID, 
     p.name AS productName, 
     SUM(d.quantity) AS totalQuantitySold
@@ -89,13 +98,13 @@ JOIN products p ON d.productID = p.productID
 GROUP BY p.productID, p.name
 ORDER BY totalQuantitySold DESC
 LIMIT 10;`,
-        tables: ["orders", "products"],
-    },
-    {
-        name: "Get Sales Per Category",
-        queryKey: "getSalesPerCategory",
-        purpose: "See which product categories sell the most",
-        query: `SELECT 
+    tables: ["orders", "products"],
+  },
+  {
+    name: "Get Sales Per Category",
+    queryKey: "getSalesPerCategory",
+    purpose: "See which product categories sell the most",
+    query: `SELECT 
     cat.categoryID, 
     cat.name AS categoryName, 
     SUM(d.unitPrice * d.quantity * (1 - d.discount)) AS totalSales
@@ -110,13 +119,13 @@ JOIN products p ON d.productID = p.productID
 JOIN categories cat ON p.categoryID = cat.categoryID
 GROUP BY cat.categoryID, cat.name
 ORDER BY totalSales DESC;`,
-        tables: ["orders", "products", "categories"],
-    },
-    {
-        name: "Get Employees with the Most Orders Handled",
-        queryKey: "getEmployeesWithMostOrders",
-        purpose: "Identify top-performing employees",
-        query: `SELECT 
+    tables: ["orders", "products", "categories"],
+  },
+  {
+    name: "Get Employees with the Most Orders Handled",
+    queryKey: "getEmployeesWithMostOrders",
+    purpose: "Identify top-performing employees",
+    query: `SELECT 
     e.employeeID, 
     e.firstName, 
     e.lastName, 
@@ -125,13 +134,13 @@ FROM orders o
 JOIN employees e ON o.employeeID = e.employeeID
 GROUP BY e.employeeID, e.firstName, e.lastName
 ORDER BY totalOrdersHandled DESC;`,
-        tables: ["orders", "employees"],
-    },
-    {
-        name: "Get Orders Shipped Late",
-        queryKey: "getLateShippedOrders",
-        purpose: "Identify orders that were shipped late",
-        query: `SELECT 
+    tables: ["orders", "employees"],
+  },
+  {
+    name: "Get Orders Shipped Late",
+    queryKey: "getLateShippedOrders",
+    purpose: "Identify orders that were shipped late",
+    query: `SELECT 
     o.orderID, 
     c.companyName AS customerName, 
     o.requiredDate, 
@@ -141,13 +150,13 @@ FROM orders o
 JOIN customers c ON o.customerID = c.customerID
 WHERE o.shippedDate > o.requiredDate
 ORDER BY daysLate DESC;`,
-        tables: ["orders", "customers"],
-    },
-    {
-        name: "Get Revenue Per Supplier",
-        queryKey: "getRevenuePerSupplier",
-        purpose: "Find out which suppliers contribute the most revenue",
-        query: `SELECT 
+    tables: ["orders", "customers"],
+  },
+  {
+    name: "Get Revenue Per Supplier",
+    queryKey: "getRevenuePerSupplier",
+    purpose: "Find out which suppliers contribute the most revenue",
+    query: `SELECT 
     sup.supplierID, 
     sup.companyName, 
     SUM(d.unitPrice * d.quantity * (1 - d.discount)) AS totalRevenue
@@ -162,13 +171,14 @@ JOIN products p ON d.productID = p.productID
 JOIN suppliers sup ON p.supplierID = sup.supplierID
 GROUP BY sup.supplierID, sup.companyName
 ORDER BY totalRevenue DESC;`,
-        tables: ["orders", "products", "suppliers"],
-    },
-    {
-        name: "Get Customer Orders with Product Details",
-        queryKey: "getCustomerOrdersWithProducts",
-        purpose: "Show each customer's orders along with the products they purchased",
-        query: `SELECT 
+    tables: ["orders", "products", "suppliers"],
+  },
+  {
+    name: "Get Customer Orders with Product Details",
+    queryKey: "getCustomerOrdersWithProducts",
+    purpose:
+      "Show each customer's orders along with the products they purchased",
+    query: `SELECT 
     o.orderID, 
     o.customerID, 
     c.companyName, 
@@ -187,13 +197,13 @@ JOIN JSON_TABLE(o.details, '$[*]' COLUMNS (
 )) AS d ON TRUE
 JOIN products p ON d.productID = p.productID
 ORDER BY o.orderID;`,
-        tables: ["orders", "customers", "products"],
-    },
-    {
-        name: "Get Monthly Sales Trend",
-        queryKey: "getMonthlySalesTrend",
-        purpose: "Track sales performance over time",
-        query: `SELECT 
+    tables: ["orders", "customers", "products"],
+  },
+  {
+    name: "Get Monthly Sales Trend",
+    queryKey: "getMonthlySalesTrend",
+    purpose: "Track sales performance over time",
+    query: `SELECT 
     DATE_FORMAT(o.orderDate, '%Y-%m') AS orderMonth, 
     SUM(d.unitPrice * d.quantity * (1 - d.discount)) AS totalSales
 FROM orders o
@@ -204,25 +214,25 @@ JOIN JSON_TABLE(o.details, '$[*]' COLUMNS (
 )) AS d ON TRUE
 GROUP BY orderMonth
 ORDER BY orderMonth;`,
-        tables: ["orders"],
-    },
-    {
-        name: "Get Orders by Region",
-        queryKey: "getOrdersByRegion",
-        purpose: "Find out where most orders are being shipped",
-        query: `SELECT 
+    tables: ["orders"],
+  },
+  {
+    name: "Get Orders by Region",
+    queryKey: "getOrdersByRegion",
+    purpose: "Find out where most orders are being shipped",
+    query: `SELECT 
     o.shipAddress->>'$.region' AS region, 
     COUNT(o.orderID) AS totalOrders
 FROM orders o
 GROUP BY region
 ORDER BY totalOrders DESC;`,
-        tables: ["orders"],
-    },
-    {
-        name: "Get Orders with High Discounts",
-        queryKey: "getHighDiscountOrders",
-        purpose: "Identify orders with high discount rates",
-        query: `SELECT 
+    tables: ["orders"],
+  },
+  {
+    name: "Get Orders with High Discounts",
+    queryKey: "getHighDiscountOrders",
+    purpose: "Identify orders with high discount rates",
+    query: `SELECT 
     o.orderID, 
     c.companyName, 
     p.name AS productName, 
@@ -241,13 +251,13 @@ JOIN JSON_TABLE(o.details, '$[*]' COLUMNS (
 JOIN products p ON d.productID = p.productID
 WHERE d.discount > 0.2
 ORDER BY discountAmount DESC;`,
-        tables: ["orders", "customers", "products"],
-    },
-    {
-        name: "Get all customers",
-        queryKey: "getAllCustomers",
-        query: "SELECT * FROM customers",
-        purpose: "View all customer records",
-        tables: ["customers"]
-    },
+    tables: ["orders", "customers", "products"],
+  },
+  {
+    name: "Get all customers",
+    queryKey: "getAllCustomers",
+    query: "SELECT * FROM customers",
+    purpose: "View all customer records",
+    tables: ["customers"],
+  },
 ];
