@@ -29,8 +29,8 @@ Access the SQL Query Editor at: [SQL Query Editor](https://sql-editor-eta.vercel
 
 ## Performance Metrics
 
-### Page Load Time
-The SQL Query Editor application achieves an optimal load time based on Lighthouse performance metrics:
+### Lighthouse Performance Metrics
+**Performance Score**: 100/100
 - **First Contentful Paint (FCP)**: 0.3s
 - **Largest Contentful Paint (LCP)**: 0.4s
 - **Speed Index**: 0.3s
@@ -39,11 +39,22 @@ The SQL Query Editor application achieves an optimal load time based on Lighthou
 
   <img width="1440" alt="Screenshot 2025-02-16 at 8 15 35 PM" src="https://github.com/user-attachments/assets/10c678af-57cf-4c4b-acfd-c8f245d2b538" />
 
+### WebPageTest Performance Metrics
+**Settings: Desktop/Chromev132/Cable/Dulles, Virginia USA**
+- **Time to First Byte**: 0.187s
+- **Start Render**: 0.500s
+- **First Contentful Paint**: 0.463s
+- **Speed Index**: 0.500s
+- **Largest Contentful Paint**: 0.463s
+- **Cumulative Layout Shift**: 0
+- **Total Blocking Time**: 0.000s
+- **Page Weight**: 246KB
+  <img width="1440" alt="Screenshot 2025-02-16 at 8 38 51 PM" src="https://github.com/user-attachments/assets/87ee45d0-fd5f-4cc3-a1c3-750a7f0d8206" />
 
 These metrics indicate a fast and smooth user experience with minimal layout shifts and blocking times.
 
 ### Measurement Method
-The page load times were measured using [Lighthouse](https://developers.google.com/web/tools/lighthouse) on a deployed version of the application (`https://sql-editor-eta.vercel.app/`). 
+The page load times were measured using both [WebPageTest](https://www.webpagetest.org/) and [Lighthouse](https://developers.google.com/web/tools/lighthouse) audits in Chrome DevTools to provide detailed insights into performance metrics and web vitals.
 
 ## Optimizations Implemented
 
