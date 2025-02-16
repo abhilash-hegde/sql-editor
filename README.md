@@ -7,6 +7,9 @@ SQL Query Editor is a web-based application that allows users to execute SQL que
 ### Live Application
 Access the SQL Query Editor at: [SQL Query Editor](https://sql-editor-eta.vercel.app/)
 
+<img width="1440" alt="Screenshot 2025-02-16 at 8 19 33 PM" src="https://github.com/user-attachments/assets/bc647488-fe18-4693-a275-c3814402708a" />
+
+
 ## Technology Stack
 
 - **Framework**: Next.js (React)
@@ -17,9 +20,6 @@ Access the SQL Query Editor at: [SQL Query Editor](https://sql-editor-eta.vercel
   - `tailwindcss`: For styling
   - `lucide-react`: For icons
 
-## Predefined SQL Queries
-
-
 ## Performance Metrics
 
 ### Page Load Time
@@ -29,6 +29,9 @@ The SQL Query Editor application achieves an optimal load time based on Lighthou
 - **Speed Index**: 0.3s
 - **Total Blocking Time (TBT)**: 0ms
 - **Cumulative Layout Shift (CLS)**: 0
+
+  <img width="1440" alt="Screenshot 2025-02-16 at 8 15 35 PM" src="https://github.com/user-attachments/assets/10c678af-57cf-4c4b-acfd-c8f245d2b538" />
+
 
 These metrics indicate a fast and smooth user experience with minimal layout shifts and blocking times.
 
