@@ -1,0 +1,23 @@
+[{
+    "columnName": "regionID",
+    "dataType": "int"
+},
+{
+    "columnName": "name",
+    "dataType": "varchar"
+},
+{
+    "columnName": "territories",
+    "dataType": "array",
+    "children": [
+        {
+            "columnName": "territoryID",
+            "dataType": "int"
+        },
+        {
+            "columnName": "name",
+            "dataType": "varchar"
+        }
+    ]
+} 
+]

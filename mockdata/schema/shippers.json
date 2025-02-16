@@ -1,0 +1,14 @@
+[
+    {
+        "columnName": "shipperID",
+        "dataType": "int"
+    },
+    {
+        "columnName": "companyName",
+        "dataType": "varchar"
+    },
+    {
+        "columnName": "phone",
+        "dataType": "varchar"
+    }
+]

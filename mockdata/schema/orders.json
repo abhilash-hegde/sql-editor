@@ -1,0 +1,75 @@
+[{
+    "columnName": "orderID",
+    "dataType": "int"
+},{
+    "columnName": "customerID",
+    "dataType": "varchar"
+},{
+    "columnName": "employeeID",
+    "dataType": "int"
+},{
+    "columnName": "orderDate",
+    "dataType": "datetime"
+},{
+    "columnName": "requiredDate",
+    "dataType": "datetime"
+},{
+    "columnName": "shippedDate",
+    "dataType": "datetime"
+},{
+    "columnName": "shipVia",
+    "dataType": "int"
+},{
+    "columnName": "freight",
+    "dataType": "decimal"
+},{
+    "columnName": "shipName",
+    "dataType": "varchar"
+},{
+    "columnName": "shipAddress",
+    "dataType": "json",
+    "children": [
+        {
+            "columnName": "street",
+            "dataType": "varchar"
+        },
+        {
+            "columnName": "city",
+            "dataType": "varchar"
+        },
+        {
+            "columnName": "region",
+            "dataType": "varchar"
+        },
+        {
+            "columnName": "postalCode",
+            "dataType": "int"
+        },
+        {
+            "columnName": "country",
+            "dataType": "varchar"
+        }
+    ]
+},{
+    "columnName": "details",
+    "dataType": "json",
+    "children": [
+        {
+            "columnName": "productID",
+            "dataType": "int"
+        },
+        {
+            "columnName": "unitPrice",
+            "dataType": "decimal"
+        },
+        {
+            "columnName": "quantity",
+            "dataType": "int"
+        },
+        {
+            "columnName": "discount",
+            "dataType": "decimal"
+        }
+    ]
+}
+]

@@ -1,0 +1,78 @@
+[
+    {
+        "columnName": "employeeID",
+        "dataType": "int"
+    },
+    {
+        "columnName": "lastName",
+        "dataType": "varchar"
+    },
+    {
+        "columnName": "firstName",
+        "dataType": "varchar"
+    },
+    {
+        "columnName": "title",
+        "dataType": "varchar"
+    },
+    {
+        "columnName": "titleOfCourtesy",
+        "dataType": "varchar"
+    },
+    {
+        "columnName": "birthDate",
+        "dataType": "datetime"
+    },
+    {
+        "columnName": "hireDate",
+        "dataType": "datetime"
+    },
+    {
+        "columnName": "address",
+        "dataType": "json",
+        "children": [
+            {
+                "columnName": "street",
+                "dataType": "varchar"
+            },
+            {
+                "columnName": "city",
+                "dataType": "varchar"
+            },
+            {
+                "columnName": "region",
+                "dataType": "varchar"
+            },
+            {
+                "columnName": "postalCode",
+                "dataType": "int"
+            },
+            {
+                "columnName": "country",
+                "dataType": "varchar"
+            },
+            {
+                "columnName": "phone",
+                "dataType": "varchar"
+            }
+        ]
+    },
+    {
+        "columnName": "notes",
+        "dataType": "text"
+    },
+    {
+        "columnName": "reportsTo",
+        "dataType": "varchar"
+    },
+    {
+        "columnName": "territoryIDs",
+        "dataType": "array",
+        "children": [
+            {
+                "columnName": "territoryID",
+                "dataType": "int"
+            }
+        ]
+    }
+]

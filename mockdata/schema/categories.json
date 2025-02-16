@@ -1,0 +1,14 @@
+[
+    {
+        "columnName": "categoryID",
+        "dataType": "int"
+    },
+    {
+        "columnName": "description",
+        "dataType": "varchar"
+    },
+    {
+        "columnName": "name",
+        "dataType": "varchar"
+    }
+]

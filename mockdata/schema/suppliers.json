@@ -1,0 +1,48 @@
+[
+    {
+        "columnName": "supplierID",
+        "dataType": "int"
+    },
+    {
+        "columnName": "companyName",
+        "dataType": "varchar"
+    },
+    {
+        "columnName": "contactName",
+        "dataType": "varchar"
+    },
+    {
+        "columnName": "contactTitle",
+        "dataType": "varchar"
+    },
+    {
+        "columnName": "address",
+        "dataType": "json",
+        "children": [
+            {
+                "columnName": "street",
+                "dataType": "varchar"
+            },
+            {
+                "columnName": "city",
+                "dataType": "varchar"
+            },
+            {
+                "columnName": "region",
+                "dataType": "varchar"
+            },
+            {
+                "columnName": "postalCode",
+                "dataType": "int"
+            },
+            {
+                "columnName": "country",
+                "dataType": "varchar"
+            },
+            {
+                "columnName": "phone",
+                "dataType": "varchar"
+            }
+        ]
+    }
+]

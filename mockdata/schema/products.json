@@ -1,0 +1,42 @@
+[
+    {
+        "columnName": "productID",
+        "dataType": "int"
+    },
+    {
+        "columnName": "supplierID",
+        "dataType": "int"
+    },
+    {
+        "columnName": "categoryID",
+        "dataType": "int"
+    },
+    {
+        "columnName": "quantityPerUnit",
+        "dataType": "varchar"
+    },
+    {
+        "columnName": "unitPrice",
+        "dataType": "int"
+    },
+    {
+        "columnName": "unitsInStock",
+        "dataType": "int"
+    },
+    {
+        "columnName": "unitsOnOrder",
+        "dataType": "int"
+    },
+    {
+        "columnName": "reorderLevel",
+        "dataType": "int"
+    },
+    {
+        "columnName": "discontinued",
+        "dataType": "boolean"
+    },
+    {
+        "columnName": "name",
+        "dataType": "varchar"
+    }
+]
