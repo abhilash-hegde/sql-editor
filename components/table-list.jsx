@@ -62,7 +62,7 @@ function TableActions({ table, schemaTable, setSchemaTable, onViewData }) {
 
   return (
     <>
-      <div className="flex space-x-2 align-center mt-1 pb-1">
+      <div className="flex flex-col xl:flex-row space-y-2 xl:space-y-0 xl:space-x-2 align-center mt-1 pb-1">
         <Button
           onClick={() => onViewData(table)}
           variant="outline"

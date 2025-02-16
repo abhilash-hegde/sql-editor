@@ -74,7 +74,7 @@ export default function Sidebar({
 function CollapsibleSection({ isOpen, setIsOpen, title, children }) {
   return (
     <Collapsible open={isOpen} onOpenChange={setIsOpen}>
-      <CollapsibleTrigger className="flex items-center">
+      <CollapsibleTrigger className="flex items-center text-s font-semibold">
         {isOpen ? (
           <ChevronUp className="h-4 w-4 mr-2" />
         ) : (

@@ -161,12 +161,12 @@ const TableComponent = ({ table }) => (
 
 const TablePagination = ({ table }) => {
   return (
-    <div className="flex items-center justify-between px-2">
-      <div className="flex-1 text-sm text-muted-foreground">
+    <div className="flex flex-col lg:flex-row items-center justify-between px-2 space-y-4 lg:space-y-0">
+      <div className="flex-1 text-sm text-muted-foreground text-center lg:text-left">
         {table.getFilteredSelectedRowModel().rows.length} of{" "}
         {table.getFilteredRowModel().rows.length} row(s) selected.
       </div>
-      <div className="flex items-center space-x-6 lg:space-x-8">
+      <div className="flex flex-col sm:flex-row sm:flex-wrap sm:justify-center items-center space-y-4 sm:space-y-2 sm:space-x-4 lg:space-x-8">
         <div className="flex items-center space-x-2">
           <p className="text-sm font-medium">Rows per page</p>
           <Select
@@ -187,14 +187,14 @@ const TablePagination = ({ table }) => {
             </SelectContent>
           </Select>
         </div>
-        <div className="flex w-[100px] items-center justify-center text-sm font-medium">
+        <div className="flex w-[100px] items-center justify-center text-sm font-medium sm:order-3">
           Page {table.getState().pagination.pageIndex + 1} of{" "}
           {table.getPageCount()}
         </div>
-        <div className="flex items-center space-x-2">
+        <div className="flex flex-wrap justify-center items-center space-x-2 sm:order-2">
           <Button
             variant="outline"
-            className="hidden h-8 w-8 p-0 lg:flex"
+            className="hidden h-8 w-8 p-0 sm:flex"
             onClick={() => table.setPageIndex(0)}
             disabled={!table.getCanPreviousPage()}
           >
@@ -221,7 +221,7 @@ const TablePagination = ({ table }) => {
           </Button>
           <Button
             variant="outline"
-            className="hidden h-8 w-8 p-0 lg:flex"
+            className="hidden h-8 w-8 p-0 sm:flex"
             onClick={() => table.setPageIndex(table.getPageCount() - 1)}
             disabled={!table.getCanNextPage()}
           >

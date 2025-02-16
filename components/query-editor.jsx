@@ -131,7 +131,7 @@ function QueryResultsContainer({
             <Maximize2 className="h-4 w-4" />
           )}
         </Button>
-        <div className="text-xs text-gray-700">
+        <div className="text-xs text-gray-700 ml-2">
           {totalRows} row(s) fetched - {executionTime}ms on {queryFetchedDate}
         </div>
         <div className="flex space-x-4">
