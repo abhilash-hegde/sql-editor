@@ -8,6 +8,23 @@ import {
   flexRender,
 } from "@tanstack/react-table";
 import {
+  ArrowDown,
+  ArrowUp,
+  ChevronLeft,
+  ChevronRight,
+  ChevronsLeft,
+  ChevronsRight,
+  ChevronsUpDown,
+} from "lucide-react";
+import exportData from "@/lib/export-data";
+import {
+  Select,
+  SelectContent,
+  SelectItem,
+  SelectTrigger,
+  SelectValue,
+} from "@/components/ui/select";
+import {
   Table,
   TableBody,
   TableCell,
@@ -17,97 +34,23 @@ import {
 } from "@/components/ui/table";
 import { Input } from "@/components/ui/input";
 import { Button } from "@/components/ui/button";
-import {
-  ChevronLeft,
-  ChevronRight,
-  ChevronsLeft,
-  ChevronsRight,
-} from "lucide-react";
-import {
-  Select,
-  SelectContent,
-  SelectItem,
-  SelectTrigger,
-  SelectValue,
-} from "@/components/ui/select";
-
 import { Checkbox } from "@/components/ui/checkbox";
-import exportData from "@/lib/export-data";
-import ExportButton from "./export-button";
+import ExportButton from "@/components/export-button";
 
-export default function QueryResults({ results }) {
-  const [searchTerm, setSearchTerm] = useState("");
-  const [sorting, setSorting] = useState([]);
-  const [rowSelection, setRowSelection] = useState({});
-  const [loadingFormat, setLoadingFormat] = useState({});
+export default function QueryResults({ results = [] }) {
+  const {
+    searchTerm,
+    setSearchTerm,
+    sorting,
+    setSorting,
+    rowSelection,
+    setRowSelection,
+    loadingFormat,
+    setLoadingFormat,
+    filteredResults,
+  } = useTableData(results);
 
-  if (!results || results.length === 0) {
-    return <div>No results to display.</div>;
-  }
-
-  function getColumns(obj, columnKey = "") {
-    return Object.entries(obj).flatMap(([key, value]) => {
-      if (value && typeof value === "object") {
-        return getColumns(value, columnKey ? `${columnKey}.${key}` : key);
-      }
-      const accessorKey = columnKey ? `${columnKey}.${key}` : key;
-      return {
-        accessorKey,
-        header: accessorKey,
-        cell: ({ getValue }) => formatCell(accessorKey, getValue()),
-      };
-    });
-  }
-
-  function formatCell(key, value) {
-    if (!value) return "";
-    if (key.toLowerCase().includes("date")) {
-      return new Date(value).toLocaleDateString();
-    }
-    return value;
-  }
-
-  const columns = useMemo(
-    () => [
-      {
-        id: "select",
-        header: ({ table }) => (
-          <Checkbox
-            checked={table.getIsAllPageRowsSelected()}
-            onCheckedChange={(value) =>
-              table.toggleAllPageRowsSelected(!!value)
-            }
-          />
-        ),
-        cell: ({ row }) => (
-          <Checkbox
-            checked={row.getIsSelected()}
-            onCheckedChange={(value) => row.toggleSelected(!!value)}
-          />
-        ),
-        size: 50,
-      },
-      {
-        accessorFn: (_, index) => index + 1,
-        id: "index",
-        header: "#",
-        cell: ({ row }) => row.index + 1,
-        size: 50,
-      },
-      ...getColumns(results[0]),
-    ],
-    [results]
-  );
-
-  const filteredResults = useMemo(() => {
-    return results.filter((row) =>
-      Object.values(row).some((value) =>
-        JSON.stringify(value ?? "")
-          .toLowerCase()
-          .includes(searchTerm.toLowerCase())
-      )
-    );
-  }, [results, searchTerm]);
+  const columns = useTableColumns(results);
 
   const table = useReactTable({
     data: filteredResults,
@@ -121,7 +64,11 @@ export default function QueryResults({ results }) {
     onRowSelectionChange: setRowSelection,
   });
 
-  function exportDataHandler(format) {
+  if (!results || results.length === 0) {
+    return <div>No results to display.</div>;
+  }
+
+  const exportDataHandler = (format) => {
     setLoadingFormat((prev) => ({
       ...prev,
       [format]: true,
@@ -136,7 +83,7 @@ export default function QueryResults({ results }) {
         return updated;
       });
     });
-  }
+  };
 
   return (
     <div className="space-y-4">
@@ -154,59 +101,65 @@ export default function QueryResults({ results }) {
           variant="outline"
         />
       </div>
-      <div className="overflow-x-auto">
-        <Table>
-          <TableHeader>
-            {table.getHeaderGroups().map((headerGroup) => (
-              <TableRow key={headerGroup.id}>
-                {headerGroup.headers.map((header) => (
-                  <TableHead
-                    key={header.id}
-                    onClick={header.column.getToggleSortingHandler()}
-                    className="cursor-pointer"
-                  >
-                    {flexRender(
-                      header.column.columnDef.header,
-                      header.getContext()
-                    )}
-                    {header.column.getIsSorted() === "asc"
-                      ? " ▲"
-                      : header.column.getIsSorted() === "desc"
-                      ? " ▼"
-                      : ""}
-                  </TableHead>
-                ))}
-              </TableRow>
-            ))}
-          </TableHeader>
-          <TableBody>
-            {table.getRowModel().rows.map((row) => (
-              <TableRow key={row.id} className="h-10">
-                {row.getVisibleCells().map((cell) => (
-                  <TableCell
-                    key={cell.id}
-                    style={{ width: cell.column.getSize() }}
-                    className="h-10"
-                  >
-                    <div className="overflow-hidden text-ellipsis whitespace-nowrap max-w-[200px] line-clamp-3">
-                      {flexRender(
-                        cell.column.columnDef.cell,
-                        cell.getContext()
-                      )}
-                    </div>
-                  </TableCell>
-                ))}
-              </TableRow>
-            ))}
-          </TableBody>
-        </Table>
-      </div>
-      <Pagination table={table} />
+      <TableComponent table={table} />
+      <TablePagination table={table} />
     </div>
   );
 }
 
-const Pagination = ({ table }) => {
+const TableComponent = ({ table }) => (
+  <div className="overflow-x-auto">
+    <Table>
+      <TableHeader>
+        {table.getHeaderGroups().map((headerGroup) => (
+          <TableRow key={headerGroup.id}>
+            {headerGroup.headers.map((header, index) => (
+              <TableHead
+                key={header.id}
+                onClick={header.column.getToggleSortingHandler()}
+                className="cursor-pointer"
+              >
+                <div className="cursor-pointer inline-flex items-center gap-x-2 whitespace-nowrap">
+                  {flexRender(
+                    header.column.columnDef.header,
+                    header.getContext()
+                  )}
+                  {index > 1 &&
+                    (header.column.getIsSorted() === "desc" ? (
+                      <ArrowDown className="w-3 h-3" />
+                    ) : header.column.getIsSorted() === "asc" ? (
+                      <ArrowUp className="w-3 h-3" />
+                    ) : (
+                      <ChevronsUpDown className="w-3 h-3" />
+                    ))}
+                </div>
+              </TableHead>
+            ))}
+          </TableRow>
+        ))}
+      </TableHeader>
+      <TableBody>
+        {table.getRowModel().rows.map((row) => (
+          <TableRow key={row.id} className="h-10">
+            {row.getVisibleCells().map((cell) => (
+              <TableCell
+                key={cell.id}
+                style={{ width: cell.column.getSize() }}
+                className="h-10"
+              >
+                <div className="overflow-hidden text-ellipsis whitespace-nowrap max-w-[200px] line-clamp-3">
+                  {flexRender(cell.column.columnDef.cell, cell.getContext())}
+                </div>
+              </TableCell>
+            ))}
+          </TableRow>
+        ))}
+      </TableBody>
+    </Table>
+  </div>
+);
+
+const TablePagination = ({ table }) => {
   return (
     <div className="flex items-center justify-between px-2">
       <div className="flex-1 text-sm text-muted-foreground">
@@ -280,3 +233,90 @@ const Pagination = ({ table }) => {
     </div>
   );
 };
+
+function useTableData(results) {
+  const [searchTerm, setSearchTerm] = useState("");
+  const [sorting, setSorting] = useState([]);
+  const [rowSelection, setRowSelection] = useState({});
+  const [loadingFormat, setLoadingFormat] = useState({});
+  console.log(results);
+
+  const filteredResults = useMemo(() => {
+    return results.filter((row) =>
+      Object.values(row).some((value) => {
+        const searchTerms = searchTerm.toLowerCase().split(" ");
+        return searchTerms.some((item) =>
+          JSON.stringify(value ?? "")
+            .toLowerCase()
+            .includes(item.toLowerCase().trim())
+        );
+      })
+    );
+  }, [results, searchTerm]);
+
+  return {
+    searchTerm,
+    setSearchTerm,
+    sorting,
+    setSorting,
+    rowSelection,
+    setRowSelection,
+    loadingFormat,
+    setLoadingFormat,
+    filteredResults,
+  };
+}
+
+function useTableColumns(results) {
+  const getColumns = (obj, columnKey = "") => {
+    return Object.entries(obj).flatMap(([key, value]) => {
+      if (value && typeof value === "object") {
+        return getColumns(value, columnKey ? `${columnKey}.${key}` : key);
+      }
+      const accessorKey = columnKey ? `${columnKey}.${key}` : key;
+      return {
+        accessorKey,
+        header: accessorKey,
+        cell: ({ getValue }) => formatCell(accessorKey, getValue()),
+      };
+    });
+  };
+
+  const formatCell = (key, value) => {
+    if (!value) return "";
+    if (key.toLowerCase().includes("date")) {
+      return new Date(value).toLocaleDateString();
+    }
+    return value;
+  };
+
+  return useMemo(
+    () => [
+      {
+        id: "select",
+        header: ({ table }) => (
+          <Checkbox
+            checked={table.getIsAllPageRowsSelected()}
+            onCheckedChange={table.toggleAllPageRowsSelected}
+          />
+        ),
+        cell: ({ row }) => (
+          <Checkbox
+            checked={row.getIsSelected()}
+            onCheckedChange={row.toggleSelected}
+          />
+        ),
+        size: 50,
+      },
+      {
+        id: "index",
+        header: "#",
+        cell: ({ row, table }) =>
+          table.getSortedRowModel().rows.findIndex((r) => r.id === row.id) + 1,
+        size: 50,
+      },
+      ...getColumns(results[0]),
+    ],
+    [results]
+  );
+}

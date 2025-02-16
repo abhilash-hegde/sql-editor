@@ -1,13 +1,13 @@
 "use client";
 
 import { useState } from "react";
-import SaveQueryDialog from "@/components/save-query-dialog";
 import { TABLES } from "@/constants/table";
-import useQueryTabs from "@/hooks/useQueryTabs";
 import useSavedAndPastQueries from "@/hooks/useSavedAndPastQueries";
 import fetchQueryData from "@/lib/fetch-query-data";
+import SaveQueryDialog from "@/components/save-query-dialog";
 import QueryTabs from "@/components/query-tabs";
 import Sidebar from "@/components/sidebar";
+import useQueryTabs from "@/hooks/useQueryTabs";
 
 export default function SQLQueryRunner() {
   const [isSaveDialogOpen, setIsSaveDialogOpen] = useState(false);
@@ -23,8 +23,8 @@ export default function SQLQueryRunner() {
   } = useQueryTabs();
 
   const handleViewData = (table) => {
-    if(queryTabs.length === 5){
-      alert("You've reached the maximum number of query tabs.")
+    if (queryTabs.length === 5) {
+      alert("You've reached the maximum number of query tabs.");
       return;
     }
     const query = `SELECT * FROM ${table};`;

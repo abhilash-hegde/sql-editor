@@ -39,7 +39,6 @@ export default function useQueryTabs() {
   const closeQueryTab = (id) => {
     setQueryTabs((prev) => prev.filter((tab) => tab.id !== id));
     if (activeTab.toString() === id.toString()) {
-      console.log(activeTab.toString() === id.toString());
       const lastTab = queryTabs[queryTabs.length - 2];
       setActiveTab(lastTab ? lastTab.id : DEFAULT_QUERY_TAB.id);
     }

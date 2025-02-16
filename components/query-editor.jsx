@@ -1,10 +1,14 @@
 import { useState } from "react";
-import { Button } from "@/components/ui/button";
-import SQLInput from "@/components/sql-input";
-import QueryResults from "@/components/query-results";
-import ExportButton from "@/components/export-button";
+import dynamic from "next/dynamic";
 import { Maximize2, Minimize2, RefreshCw } from "lucide-react";
 import exportData from "@/lib/export-data";
+import { Button } from "@/components/ui/button";
+import SQLInput from "@/components/sql-input";
+import ExportButton from "@/components/export-button";
+
+const QueryResults = dynamic(() => import("@/components/query-results"), {
+  loading: () => <p>Loading...</p>,
+});
 
 export default function QueryEditor({ editor, onUpdate, onSave, onExecute }) {
   const [isExpanded, setIsExpanded] = useState(false);
