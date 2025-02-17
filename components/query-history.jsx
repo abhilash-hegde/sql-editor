@@ -33,7 +33,7 @@ export default function QueryHistory({ history, onSelectQuery }) {
                 </span>
               </Button>
             </TooltipTrigger>
-            <TooltipContent>
+            <TooltipContent className="w-80 break-words" >
               <span className="text-xs">{item.query}</span>
               <span className="text-xs text-gray-500 ml-2">
                 {new Date(item.timestamp).toLocaleString()}

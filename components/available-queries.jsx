@@ -24,7 +24,7 @@ export default function AvailableQueries({ onSelectQuery }) {
                 <span className="truncate text-xs">{query.name}</span>
               </Button>
             </TooltipTrigger>
-            <TooltipContent>
+            <TooltipContent className="w-80 break-words">
               <span className="text-xs">{query.name}</span>
               <div className="flex justify-start text-xs">
                 <span className="text-gray-400">Description:</span>{" "}
