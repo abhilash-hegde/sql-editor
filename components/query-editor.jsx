@@ -99,7 +99,7 @@ function QueryActions({ query, isLoading, onExecute, onSave }) {
         onClick={() => onExecute(query)}
         disabled={isLoading || !query?.trim()}
       >
-        {isLoading ? "Executing..." : "Execute (Ctrl+Enter)"}
+        {isLoading ? "Executing..." : "Execute"}
       </Button>
       <Button onClick={onSave} disabled={!query?.trim()}>
         Save Query
